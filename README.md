@@ -5,10 +5,10 @@ Discord Bot that posts random cat images.
 
 ##How to run:
 Edit the config.json to your Discord email and password
-...
+```
 {  
    "Email":"email",
    "Password":"password",
    "ChannelName":"NekoBot"
 }
-...
+```

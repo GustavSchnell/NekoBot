@@ -10,6 +10,7 @@ namespace NekoBot.Services
             if (e.message_text.Equals("/help"))
             {
                 e.Channel.SendMessage("Meow Meow!");
+                e.Channel.SendMessage("Visit https://github.com/dreanor/NekoBot to report bugs.");
                 e.Channel.SendMessage("Type '/cat' for a random cat.");
             }
 

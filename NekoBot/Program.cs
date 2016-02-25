@@ -34,6 +34,12 @@ namespace NekoBot
         {
             try
             {
+                if (!File.Exists("config.json"))
+                {
+                    string json = JsonConvert.SerializeObject(new Config("email", "password", "NekoBot"), Formatting.Indented);
+                    File.WriteAllText(@"config.json", json);
+                    ThrowCredentialsException();
+                }
 
                 return JsonConvert.DeserializeObject<Config>(File.ReadAllText("config.json"));
             }
@@ -49,9 +55,23 @@ namespace NekoBot
             client.ClientPrivateInformation.password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
             client.Connected += messageService.Connected;
-            client.SendLoginRequest();
+
+            try
+            {
+                client.SendLoginRequest();
+            }
+            catch (Exception)
+            {
+                ThrowCredentialsException();
+            }
+
             Thread t = new Thread(client.Connect);
             t.Start();
+        }
+
+        private static void ThrowCredentialsException()
+        {
+            throw new InvalidOperationException("Couldn't connect to Discord. Please check your credentials in the config.json file.");
         }
     }
 }

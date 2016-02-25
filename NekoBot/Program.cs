@@ -15,7 +15,9 @@ namespace NekoBot
             {
                 Config config = LoadConfig();
                 DiscordClient client = new DiscordClient();
-                Login(client, config);
+                MessageService messageService = new MessageService(client, config.ChannelName);
+
+                Login(client, messageService, config);
 
                 Console.WriteLine("Press any key to Exit.");
                 Console.ReadKey();
@@ -41,11 +43,12 @@ namespace NekoBot
             }
         }
 
-        private static void Login(DiscordClient client, Config config)
+        private static void Login(DiscordClient client, MessageService messageService, Config config)
         {
             client.ClientPrivateInformation.email = config.Email;
             client.ClientPrivateInformation.password = config.Password;
-            client.MessageReceived += MessageService.MessageReceived;
+            client.MessageReceived += messageService.MessageReceived;
+            client.Connected += messageService.Connected;
             client.SendLoginRequest();
             Thread t = new Thread(client.Connect);
             t.Start();

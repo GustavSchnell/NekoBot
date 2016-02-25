@@ -1,4 +1,5 @@
 ﻿{  
    "Email":"email",
-   "Password":"password"
+   "Password": "password",
+   "ChannelName": "NekoBot"
 }

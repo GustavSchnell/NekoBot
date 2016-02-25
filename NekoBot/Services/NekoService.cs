@@ -6,6 +6,8 @@ namespace NekoBot.Services
 {
     public class NekoService
     {
+        private const string RandomNekoUrl = "http://random.cat/meow";
+
         public static string GetRandomNeko()
         {
             RandomNeko randomNeko = null;
@@ -14,7 +16,7 @@ namespace NekoBot.Services
             {
                 try
                 {
-                    string json = webClient.DownloadString("http://random.cat/meow");
+                    string json = webClient.DownloadString(RandomNekoUrl);
                     randomNeko = JsonConvert.DeserializeObject<RandomNeko>(json);
                 }
                 catch (Exception ex)

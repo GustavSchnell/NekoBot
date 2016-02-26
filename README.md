@@ -9,6 +9,5 @@ Edit the config.json to your Discord email and password
 {  
    "Email":"email",
    "Password":"password",
-   "ChannelName":"NekoBot"
 }
 ```

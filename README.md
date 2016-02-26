@@ -11,3 +11,15 @@ Set your Discord email and password in the config.json
    "Password":"password",
 }
 ```
+
+###Commands:
+| Command | Description |
+| ------------- | ------------- |
+| /help | Lists all available commands to the current user. |
+| /cat  | Posts a random cat link from http://random.cat/  |
+| /music | Posts meme music from http://nigge.rs/ |
+| /clear | Clears the entire chat history of the current channel. |
+
+
+###Permissions
+Todo!

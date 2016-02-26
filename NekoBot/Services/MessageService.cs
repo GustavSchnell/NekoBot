@@ -62,7 +62,7 @@ namespace NekoBot.Services
 
         private void HelpCmd(DiscordChannel channel)
         {
-            string welcome = "Meow Meow! Running on version: " + Assembly.GetExecutingAssembly().GetName().Version;
+            string welcome = "Meow Meow!";
             string developer = "Visit https://github.com/dreanor/NekoBot to report bugs or request features.";
             string line = "--------------------------------";
             string commands = "Type '/cat' for a random cat.";

@@ -19,8 +19,8 @@ namespace NekoBot
 
                 Login(client, messageService, config);
 
-                Console.WriteLine("Press any key to Exit.");
-                Console.ReadKey();
+                Console.WriteLine("Press enter to Exit.");
+                Console.ReadLine();
                 client.Logout();
             }
             catch (Exception ex)
@@ -55,6 +55,9 @@ namespace NekoBot
             client.ClientPrivateInformation.password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
             client.Connected += messageService.Connected;
+#if DEBUG
+            client.TextClientDebugMessageReceived += (o, e) => Console.WriteLine(e.message.Message);
+#endif
 
             try
             {

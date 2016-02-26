@@ -15,7 +15,7 @@ namespace NekoBot
             {
                 Config config = LoadConfig();
                 DiscordClient client = new DiscordClient();
-                MessageService messageService = new MessageService(client, config.ChannelName);
+                MessageService messageService = new MessageService(client, config.ChannelName, config.ListenOnAllChannels);
 
                 Login(client, messageService, config);
 
@@ -36,7 +36,7 @@ namespace NekoBot
             {
                 if (!File.Exists("config.json"))
                 {
-                    string json = JsonConvert.SerializeObject(new Config("email", "password", "NekoBot"), Formatting.Indented);
+                    string json = JsonConvert.SerializeObject(new Config("email", "password", "NekoBot", true), Formatting.Indented);
                     File.WriteAllText(@"config.json", json);
                     ThrowCredentialsException();
                 }

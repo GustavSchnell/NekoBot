@@ -4,7 +4,7 @@
 Discord Bot that posts random cat images.
 
 ##How to run:
-Edit the config.json to your Discord email and password
+Set your Discord email and password in the config.json
 ```
 {  
    "Email":"email",

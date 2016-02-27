@@ -2,12 +2,14 @@
 using NekoBot.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NekoBot.Commands
 {
     public class UserCommands
     {
+        private Regex translateCmd = new Regex(@"[/]translate '.*.' [a-z]{2}");
+
         public UserCommands()
         {
             Commands = new List<string> { "/help", "/cat", "/music", "/translate" };
@@ -17,39 +19,36 @@ namespace NekoBot.Commands
 
         public void HandleCommands(string message, DiscordChannel channel)
         {
-            // /translate "du bist doof",de,e 
-
-            if (message.StartsWith("/translate"))
+            if (translateCmd.IsMatch(message))
             {
-                var b = message.Split('\'');
-
-                if (b.Length != 3)
-                {
-                    channel.SendMessage("Wrong command! The correct syntax is: /translate 'text' de");
-                }
-          
-
-                channel.SendMessage(string.Format("'{0}' translates to '{1}' in '{2}'",
-                b[1].Trim(),
-                TranslateService.Translate(b[1].Trim(), b[2].Trim()),
-                b[2].Trim()));
+                TranslateCmd(message, channel);
                 return;
             }
 
             switch (message)
             {
-                case "/help":
-                    HelpCmd(channel);
-                    break;
                 case "/cat":
                     CatCmd(channel);
-                    break;
+                    return;
                 case "/music":
                     MusicCmd(channel);
-                    break;
+                    return;
                 default:
+                    channel.SendMessage("Sorry! I couldn't identify your command.");
                     break;
             }
+        }
+
+        private static void TranslateCmd(string message, DiscordChannel channel)
+        {
+            string[] splittedCmd = message.Split('\'');
+            string text = splittedCmd[1].Trim();
+            string language = splittedCmd[2].Trim();
+
+            channel.SendMessage(string.Format("{0} translates to {1} in {2}",
+                StringHelper.Bold(text),
+                TranslateService.Translate(text, language),
+                StringHelper.Bold(language)));
         }
 
         private void MusicCmd(DiscordChannel channel)
@@ -67,17 +66,6 @@ namespace NekoBot.Commands
             }
 
             channel.SendMessage(url);
-        }
-
-        private void HelpCmd(DiscordChannel channel)
-        {
-            string welcome = "Meow Meow!";
-            string catCmd = "Type '/cat' for a random cat.";
-            string musicCmd = "Type '/music' for random meme music.";
-
-            string message = StringHelper.BuildMessage(welcome, catCmd, musicCmd);
-
-            channel.SendMessage(message);
         }
     }
 }

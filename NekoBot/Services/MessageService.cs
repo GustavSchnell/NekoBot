@@ -1,10 +1,9 @@
-﻿using System;
-using DiscordSharp;
+﻿using DiscordSharp;
 using DiscordSharp.Events;
 using DiscordSharp.Objects;
 using NekoBot.Commands;
+using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace NekoBot.Services
 {

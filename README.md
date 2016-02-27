@@ -12,4 +12,7 @@ Change the email and password in the [config.json](https://github.com/dreanor/Ne
 | /help | Lists all available commands to the current user. | @everyone |
 | /cat  | Posts a random cat link from http://random.cat/  | @everyone |
 | /music | Posts meme music from http://nigge.rs/ | @everyone |
+| /translate 'Text to translate' de | Translates the text to the given country code | @everyone |
 | /clear | Clears the entire chat history of the current channel. | Role in AdminCommandUserRoles |
+| /delete 1 | Deletes the last amount of messages in the current channel | Role in AdminCommandUserRoles |
+

@@ -17,5 +17,10 @@ namespace NekoBot
 
             return stringBuilder.ToString();
         }
+
+        public static string Bold(string input)
+        {
+            return string.Format("**{0}**", input);
+        }
     }
 }

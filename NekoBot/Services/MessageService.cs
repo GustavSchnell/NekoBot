@@ -37,7 +37,6 @@ namespace NekoBot.Services
             if (e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => x.name.ToLower().Equals(y.ToLower()))))
             {
                 adminCommands.HandleCommands(e);
-                return;
             }
 
             switch (e.message_text)

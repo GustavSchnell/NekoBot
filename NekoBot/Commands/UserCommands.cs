@@ -46,7 +46,7 @@ namespace NekoBot.Commands
 
             channel.SendMessage(string.Format("{0} translates to {1} in {2}",
                 StringHelper.Bold(text),
-                TranslateService.Translate(text, language),
+                StringHelper.Bold(TranslateService.Translate(text, language)),
                 StringHelper.Bold(language)));
         }
 

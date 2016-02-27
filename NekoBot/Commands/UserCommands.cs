@@ -34,7 +34,6 @@ namespace NekoBot.Commands
                     MusicCmd(channel);
                     return;
                 default:
-                    channel.SendMessage("Sorry! I couldn't identify your command.");
                     break;
             }
         }

@@ -32,7 +32,6 @@ namespace NekoBot.Commands
                     ClearCmd(e.Channel);
                     return;
                 default:
-                    e.Channel.SendMessage("Sorry! I couldn't identify your command.");
                     break;
             }
         }

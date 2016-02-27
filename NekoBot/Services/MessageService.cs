@@ -46,6 +46,8 @@ namespace NekoBot.Services
             {
                 userCommands.HandleCommands(message, channel);
             }
+
+            e.Channel.SendMessage("Sorry! I couldn't identify your command.");
         }
 
         private bool AllowedToExecuteAdminCommands(DiscordMessageEventArgs e)

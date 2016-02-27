@@ -50,7 +50,7 @@ namespace NekoBot.Services
 
         private bool AllowedToExecuteAdminCommands(DiscordMessageEventArgs e)
         {
-            return e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => x.name.Equals(y, StringComparison.OrdinalIgnoreCase)));
+            return e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => y.Equals(x.name, StringComparison.OrdinalIgnoreCase)));
         }
 
         private bool AllowedToListenTo(DiscordChannel channel)

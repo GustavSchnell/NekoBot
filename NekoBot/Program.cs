@@ -40,7 +40,7 @@ namespace NekoBot
                 if (!File.Exists("config.json"))
                 {
                     string json = JsonConvert.SerializeObject(GetDefaultConfig(), Formatting.Indented);
-                    File.WriteAllText(@"config.json", json);
+                    File.WriteAllText("config.json", json);
                     ThrowCredentialsException();
                 }
 

@@ -1,6 +1,7 @@
 ﻿using DiscordSharp;
 using DiscordSharp.Events;
 using DiscordSharp.Objects;
+using System;
 using System.Text.RegularExpressions;
 
 namespace NekoBot.Commands
@@ -18,7 +19,7 @@ namespace NekoBot.Commands
         public void HandleCommands(DiscordMessageEventArgs e)
         {
             string message = e.message_text;
-            
+
             if (deleteCommand.IsMatch(message))
             {
                 DeleteMessagesCmd(e, message);

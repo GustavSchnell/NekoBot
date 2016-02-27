@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Text;
 using System.Threading;
 
 namespace NekoBot
@@ -52,7 +54,7 @@ namespace NekoBot
 
         private static Config GetDefaultConfig()
         {
-            return new Config("email", "password", "NekoBot", true, new List<string> { "admin", "mod" });
+            return new Config("email", "password", new List<string> { "admin", "mod" }, new List<string> { "nekobot", "general" });
         }
 
         private static void Login(DiscordClient client, MessageService messageService, Config config)
@@ -60,7 +62,6 @@ namespace NekoBot
             client.ClientPrivateInformation.email = config.Email;
             client.ClientPrivateInformation.password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
-            client.Connected += messageService.Connected;
             client.PrivateMessageReceived += messageService.PrivateMessageReceived;
 
 #if DEBUG

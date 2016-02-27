@@ -4,12 +4,11 @@ namespace NekoBot
 {
     public class Config
     {
-        public Config(string email, string password, string channelName, bool listenOnAllChannels, List<string> adminCommandUserRoles)
+        public Config(string email, string password, List<string> adminCommandUserRoles, List<string> listenOnChannels)
         {
             Email = email;
             Password = password;
-            ChannelName = channelName;
-            ListenOnAllChannels = listenOnAllChannels;
+            ListenOnChannels = listenOnChannels;
             AdminCommandUserRoles = adminCommandUserRoles;
         }
 
@@ -17,10 +16,8 @@ namespace NekoBot
 
         public string Password { get; private set; }
 
-        public string ChannelName { get; private set; }
-
-        public bool ListenOnAllChannels { get; private set; }
-
         public List<string> AdminCommandUserRoles { get; private set; }
+
+        public List<string> ListenOnChannels { get; private set; }
     }
 }

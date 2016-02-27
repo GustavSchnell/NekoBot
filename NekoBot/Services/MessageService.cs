@@ -4,6 +4,7 @@ using DiscordSharp.Events;
 using DiscordSharp.Objects;
 using NekoBot.Commands;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace NekoBot.Services
 {
@@ -12,12 +13,14 @@ namespace NekoBot.Services
         private DiscordClient client;
         private Config config;
         private AdminCommands adminCommands;
+        private UserCommands userCommands;
 
         public MessageService(DiscordClient client, Config config)
         {
             this.config = config;
             this.client = client;
             adminCommands = new AdminCommands(client);
+            userCommands = new UserCommands();
         }
 
         public void PrivateMessageReceived(object sender, DiscordPrivateMessageEventArgs e)
@@ -28,40 +31,32 @@ namespace NekoBot.Services
         public void MessageReceived(object sender, DiscordMessageEventArgs e)
         {
             DiscordChannel channel = e.Channel;
+            string message = e.message_text;
 
-            if (!config.ListenOnAllChannels && !channel.Name.Equals(config.ChannelName.ToLower()))
+            if (!AllowedToListenTo(channel))
             {
                 return;
             }
 
-            if (e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => x.name.ToLower().Equals(y.ToLower()))))
+            if (AllowedToExecuteAdminCommands(e))
             {
                 adminCommands.HandleCommands(e);
             }
 
-            switch (e.message_text)
+            if (userCommands.Commands.Any(x => message.StartsWith(x)))
             {
-                case "/help":
-                    UserCommands.HelpCmd(channel);
-                    break;
-                case "/cat":
-                    UserCommands.CatCmd(channel);
-                    break;
-                case "/music":
-                    UserCommands.MusicCmd(channel);
-                    break;
-                default:
-                    break;
+                userCommands.HandleCommands(message, channel);
             }
         }
-     
-        public void Connected(object sender, DiscordConnectEventArgs e)
+
+        private bool AllowedToExecuteAdminCommands(DiscordMessageEventArgs e)
         {
-            DiscordChannel channel = client.GetChannelByName(config.ChannelName);
-            if (channel != null)
-            {
-                UserCommands.HelpCmd(channel);
-            }
+            return e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => x.name.Equals(y, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        private bool AllowedToListenTo(DiscordChannel channel)
+        {
+            return config.ListenOnChannels.Any(x => x.Equals(channel.Name, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

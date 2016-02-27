@@ -28,25 +28,11 @@ namespace NekoBot.Commands
         {
             string welcome = "Meow Meow!";
             string catCmd = "Type '/cat' for a random cat.";
-            string clearCmd = "Type '/clear' to clear the current channel chat.";
             string musicCmd = "Type '/music' for a random meme music link.";
 
-            string message = BuildMessage(welcome, catCmd, clearCmd, musicCmd);
+            string message = StringHelper.BuildMessage(welcome, catCmd, musicCmd);
 
             channel.SendMessage(message);
-        }
-
-        private static string BuildMessage(params string[] messages)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (string message in messages)
-            {
-                stringBuilder.Append(message);
-                stringBuilder.Append(Environment.NewLine);
-            }
-
-            return stringBuilder.ToString();
         }
     }
 }

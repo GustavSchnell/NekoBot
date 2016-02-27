@@ -4,13 +4,7 @@
 Discord Bot that posts random cat images.
 
 ##How to run:
-Set your Discord email and password in the config.json
-```
-{  
-   "Email":"email",
-   "Password":"password",
-}
-```
+Change the email and password in the [config.json](https://github.com/dreanor/NekoBot/blob/master/NekoBot/config.json)
 
 ###Commands:
 | Command | Description |
@@ -18,8 +12,4 @@ Set your Discord email and password in the config.json
 | /help | Lists all available commands to the current user. |
 | /cat  | Posts a random cat link from http://random.cat/  |
 | /music | Posts meme music from http://nigge.rs/ |
-| /clear | Clears the entire chat history of the current channel. |
-
-
-###Permissions
-Todo!
+| /clear | Clears the entire chat history of the current channel. **Requires a role in AdminCommandUserRoles** |

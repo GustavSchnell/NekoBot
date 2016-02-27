@@ -2,6 +2,7 @@
 using NekoBot.Services;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -15,7 +16,7 @@ namespace NekoBot
             {
                 Config config = LoadConfig();
                 DiscordClient client = new DiscordClient();
-                MessageService messageService = new MessageService(client, config.ChannelName, config.ListenOnAllChannels);
+                MessageService messageService = new MessageService(client, config);
 
                 Login(client, messageService, config);
 
@@ -36,7 +37,7 @@ namespace NekoBot
             {
                 if (!File.Exists("config.json"))
                 {
-                    string json = JsonConvert.SerializeObject(new Config("email", "password", "NekoBot", true), Formatting.Indented);
+                    string json = JsonConvert.SerializeObject(GetDefaultConfig(), Formatting.Indented);
                     File.WriteAllText(@"config.json", json);
                     ThrowCredentialsException();
                 }
@@ -49,12 +50,19 @@ namespace NekoBot
             }
         }
 
+        private static Config GetDefaultConfig()
+        {
+            return new Config("email", "password", "NekoBot", true, new List<string> { "admin", "mod" });
+        }
+
         private static void Login(DiscordClient client, MessageService messageService, Config config)
         {
             client.ClientPrivateInformation.email = config.Email;
             client.ClientPrivateInformation.password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
             client.Connected += messageService.Connected;
+            client.PrivateMessageReceived += messageService.PrivateMessageReceived;
+
 #if DEBUG
             client.TextClientDebugMessageReceived += (o, e) => Console.WriteLine(e.message.Message);
 #endif

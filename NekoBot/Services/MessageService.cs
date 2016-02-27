@@ -1,31 +1,45 @@
-﻿using DiscordSharp;
+﻿using System;
+using DiscordSharp;
 using DiscordSharp.Events;
 using DiscordSharp.Objects;
 using NekoBot.Commands;
+using System.Linq;
 
 namespace NekoBot.Services
 {
     public class MessageService
     {
         private DiscordClient client;
-        private string channelName;
-        private bool listenOnAllChannels;
+        private Config config;
+        private AdminCommands adminCommands;
 
-        public MessageService(DiscordClient client, string channelName, bool listenOnAllChannels)
+        public MessageService(DiscordClient client, Config config)
         {
+            this.config = config;
             this.client = client;
-            this.channelName = channelName;
-            this.listenOnAllChannels = listenOnAllChannels;
+            adminCommands = new AdminCommands(client);
+        }
+
+        public void PrivateMessageReceived(object sender, DiscordPrivateMessageEventArgs e)
+        {
+            e.Channel.recipient.SendMessage("Sorry! Private message commands don't work. Please talk to me in a public channel.");
         }
 
         public void MessageReceived(object sender, DiscordMessageEventArgs e)
         {
-            if (!listenOnAllChannels && !e.Channel.Name.Equals(channelName.ToLower()))
+            DiscordChannel channel = e.Channel;
+
+            if (!config.ListenOnAllChannels && !channel.Name.Equals(config.ChannelName.ToLower()))
             {
                 return;
             }
 
-            DiscordChannel channel = e.Channel;
+            if (e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => x.name.ToLower().Equals(y.ToLower()))))
+            {
+                adminCommands.HandleCommands(e);
+                return;
+            }
+
             switch (e.message_text)
             {
                 case "/help":
@@ -33,9 +47,6 @@ namespace NekoBot.Services
                     break;
                 case "/cat":
                     UserCommands.CatCmd(channel);
-                    break;
-                case "/clear":
-                    AdminCommands.ClearCmd(client, channel);
                     break;
                 case "/music":
                     UserCommands.MusicCmd(channel);
@@ -47,7 +58,7 @@ namespace NekoBot.Services
      
         public void Connected(object sender, DiscordConnectEventArgs e)
         {
-            DiscordChannel channel = client.GetChannelByName(channelName);
+            DiscordChannel channel = client.GetChannelByName(config.ChannelName);
             if (channel != null)
             {
                 UserCommands.HelpCmd(channel);

@@ -1,5 +1,10 @@
-﻿{  
-   "Email":"email",
-   "Password": "password",
-   "ChannelName": "NekoBot"
+﻿{
+  "Email": "email",
+  "Password": "password",
+  "ChannelName": "NekoBot",
+  "ListenOnAllChannels": true,
+  "AdminCommandUserRoles": [
+    "admin",
+    "mod"
+  ]
 }

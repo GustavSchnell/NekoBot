@@ -32,6 +32,7 @@ namespace NekoBot.Services
             DiscordChannel channel = e.Channel;
             string message = e.message_text;
 
+            //todo limit to x amount in minute
             if (!AllowedToListenTo(channel))
             {
                 return;

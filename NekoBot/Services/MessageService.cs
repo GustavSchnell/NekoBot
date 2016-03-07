@@ -22,7 +22,7 @@ namespace NekoBot.Services
             this.client = client;
             adminCommands = new AdminCommands(client);
             userCommands = new UserCommands();
-            apiCallsBlocker = new Semaphore(0, 5);
+            apiCallsBlocker = new Semaphore(5, 5);
         }
 
         public void PrivateMessageReceived(object sender, DiscordPrivateMessageEventArgs e)

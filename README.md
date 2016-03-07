@@ -1,7 +1,7 @@
 # NekoBot
 [![Build status](https://ci.appveyor.com/api/projects/status/fjlpei28tsfwfd1i?svg=true)](https://ci.appveyor.com/project/dreanor/nekobot)
 
-Discord Bot that posts random cat images.
+Discord Bot that posts random cat images. Since Discord is limited to 10 messages every 2 seconds there are limiters to prevent overflows.
 
 ##How to run:
 Change the email and password in the [config.json](https://github.com/dreanor/NekoBot/blob/master/NekoBot/config.json)

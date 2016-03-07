@@ -53,10 +53,7 @@ namespace NekoBot.Services
                     adminCommands.HandleCommands(e);
                 }
 
-                if (userCommands.Commands.Any(x => message.StartsWith(x)))
-                {
-                    userCommands.HandleCommands(message, channel);
-                }
+                userCommands.HandleCommands(message, channel);
                 apiCallsBlocker.Release(1);
             }
             catch (Exception ex)

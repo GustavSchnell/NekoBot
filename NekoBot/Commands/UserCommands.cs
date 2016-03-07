@@ -10,11 +10,6 @@ namespace NekoBot.Commands
     {
         private Regex translateCmd = new Regex(@"[/]translate '.*.' [a-z]{2}");
 
-        public UserCommands()
-        {
-            Commands = new List<string> { "/help", "/cat", "/music", "/translate" };
-        }
-
         public List<string> Commands { get; private set; }
 
         public void HandleCommands(string message, DiscordChannel channel)
@@ -29,10 +24,13 @@ namespace NekoBot.Commands
             {
                 case "/cat":
                     CatCmd(channel);
-                    return;
+                    break;
                 case "/music":
                     MusicCmd(channel);
-                    return;
+                    break;
+                case "/8ball":
+                    channel.SendMessage(EightBallService.Get());
+                    break;
                 default:
                     break;
             }

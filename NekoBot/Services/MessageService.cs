@@ -21,6 +21,7 @@ namespace NekoBot.Services
             this.config = config;
             this.client = client;
             adminCommands = new AdminCommands(client);
+            adminCommands.ConfigReload += (o, e) => this.config = (Config)o;
             userCommands = new UserCommands();
             apiCallsBlocker = new Semaphore(5, 5);
         }

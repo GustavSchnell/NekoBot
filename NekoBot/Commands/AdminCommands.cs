@@ -8,6 +8,7 @@ namespace NekoBot.Commands
 {
     public class AdminCommands
     {
+        public event EventHandler ConfigReload;
         private DiscordClient client;
         private Regex deleteCommand = new Regex(@"[/]delete.\d+");
 
@@ -30,10 +31,18 @@ namespace NekoBot.Commands
             {
                 case "/clear":
                     ClearCmd(e.Channel);
-                    return;
+                    break;
+                case "/reload":
+                    ReloadCmd();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void ReloadCmd()
+        {
+            ConfigReload(ConfigLoader.Get(), null);
         }
 
         private void DeleteMessagesCmd(DiscordMessageEventArgs e, string message)

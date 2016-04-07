@@ -32,7 +32,7 @@ namespace NekoBot.Commands
                     channel.SendMessage(EightBallService.Get());
                     break;
                 case "/help":
-                    channel.SendMessage("https://raw.githubusercontent.com/dreanor/NekoBot/master/commands.png");
+                    channel.SendMessage("https://raw.githubusercontent.com/dreanor/NekoBot/master/NekoBot/commands.PNG");
                     break;
                 default:
                     break;

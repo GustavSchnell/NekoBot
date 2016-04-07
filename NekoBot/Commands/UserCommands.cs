@@ -8,7 +8,7 @@ namespace NekoBot.Commands
 {
     public class UserCommands
     {
-        private Regex translateCmd = new Regex(@"[/]translate '.*.' [a-z]{2}");
+        private Regex translateCmd = new Regex(@"[/]translate .*. [a-z]{2}");
 
         public List<string> Commands { get; private set; }
 
@@ -41,9 +41,9 @@ namespace NekoBot.Commands
 
         private static void TranslateCmd(string message, DiscordChannel channel)
         {
-            string[] splittedCmd = message.Split('\'');
-            string text = splittedCmd[1].Trim();
-            string language = splittedCmd[2].Trim();
+            string withoutCmd = message.Remove(0, 10).Trim();
+            string language = withoutCmd.Substring(withoutCmd.Length - 2);
+            string text = withoutCmd.Remove(withoutCmd.Length - 2).Trim();
 
             channel.SendMessage(string.Format("{0} translates to {1} in {2}",
                 StringHelper.Bold(text),

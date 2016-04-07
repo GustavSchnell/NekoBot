@@ -30,11 +30,11 @@ namespace NekoBot
 
         private static void Login(DiscordClient client, MessageService messageService, Config config)
         {
-            client.ClientPrivateInformation.email = config.Email;
-            client.ClientPrivateInformation.password = config.Password;
+            client.ClientPrivateInformation.Email = config.Email;
+            client.ClientPrivateInformation.Password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
             client.PrivateMessageReceived += messageService.PrivateMessageReceived;
-
+            client.Connected += (o, e) => Console.WriteLine("Online as " + e.User.Username);
 #if DEBUG
             client.TextClientDebugMessageReceived += (o, e) => Console.WriteLine(e.message.Message);
 #endif

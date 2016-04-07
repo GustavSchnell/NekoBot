@@ -29,7 +29,7 @@ namespace NekoBot.Services
         public void PrivateMessageReceived(object sender, DiscordPrivateMessageEventArgs e)
         {
             apiCallsBlocker.WaitOne();
-            e.Channel.recipient.SendMessage("Sorry! Private message commands don't work. Please talk to me in a public channel.");
+            e.Channel.Recipient.SendMessage("Sorry! Private message commands don't work. Please talk to me in a public channel.");
             apiCallsBlocker.Release(1);
         }
 
@@ -38,14 +38,14 @@ namespace NekoBot.Services
             try
             {
                 DiscordChannel channel = e.Channel;
-                string message = e.message_text;
+                string message = e.MessageText;
 
                 if (!AllowedToListenTo(channel))
                 {
                     return;
                 }
 
-                Console.WriteLine(e.message_text);
+                Console.WriteLine(string.Format("Message '{0}' send by '{1}'", e.MessageText, e.Author.Username));
 
                 apiCallsBlocker.WaitOne();
                 if (AllowedToExecuteAdminCommands(e))
@@ -58,13 +58,13 @@ namespace NekoBot.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(string.Format("Latest message send: '{0}' by '{1}'{2}{3}", e.message_text, e.author, Environment.NewLine, ex.Message));
+                Console.WriteLine(string.Format("Latest message send: '{0}' by '{1}'{2}{3}", e.MessageText, e.Author.Username, Environment.NewLine, ex.Message));
             }
         }
 
         private bool AllowedToExecuteAdminCommands(DiscordMessageEventArgs e)
         {
-            return e.author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => y.Equals(x.name, StringComparison.OrdinalIgnoreCase)));
+            return e.Author.Roles.Any(x => config.AdminCommandUserRoles.Any(y => y.Equals(x.Name, StringComparison.OrdinalIgnoreCase)));
         }
 
         private bool AllowedToListenTo(DiscordChannel channel)

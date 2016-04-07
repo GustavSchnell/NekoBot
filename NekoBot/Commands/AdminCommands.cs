@@ -19,7 +19,7 @@ namespace NekoBot.Commands
 
         public void HandleCommands(DiscordMessageEventArgs e)
         {
-            string message = e.message_text;
+            string message = e.MessageText;
 
             if (deleteCommand.IsMatch(message))
             {

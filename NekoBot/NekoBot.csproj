@@ -39,9 +39,9 @@
     <ApplicationIcon>neko.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscordSharp, Version=0.5.3.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DiscordSharp.0.5.3.4-alpha\lib\DiscordSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="DiscordSharp, Version=0.6.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\DiscordSharp.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
@@ -90,8 +90,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="commands.PNG" />
     <Content Include="FodyWeavers.xml" />
+    <Content Include="libsodium.dll" />
     <Content Include="neko.ico" />
+    <Content Include="opus.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />

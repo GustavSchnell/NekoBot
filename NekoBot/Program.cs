@@ -1,6 +1,7 @@
 ﻿using DiscordSharp;
 using NekoBot.Services;
 using System;
+using System.Net;
 using System.Threading;
 
 namespace NekoBot
@@ -34,7 +35,12 @@ namespace NekoBot
             client.ClientPrivateInformation.Password = config.Password;
             client.MessageReceived += messageService.MessageReceived;
             client.PrivateMessageReceived += messageService.PrivateMessageReceived;
-            client.Connected += (o, e) => Console.WriteLine("Online as " + e.User.Username);
+            client.Connected += (o, e) =>
+            {
+                Console.WriteLine("Online as " + e.User.Username);
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            };
 #if DEBUG
             client.TextClientDebugMessageReceived += (o, e) => Console.WriteLine(e.message.Message);
 #endif

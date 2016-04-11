@@ -8,34 +8,39 @@ namespace NekoBot.Commands
 {
     public class UserCommands
     {
-        private Regex translateCmd = new Regex(@"[/]translate .*. [a-z]{2}");
-
         public List<string> Commands { get; private set; }
 
-        public void HandleCommands(string message, DiscordChannel channel)
+        public bool HandleCommands(string message, DiscordChannel channel)
         {
-            if (translateCmd.IsMatch(message))
+            var match = Regex.Match(message, @"[/]translate .*. [a-z]{2}");
+
+            if (match.Success)
             {
-                TranslateCmd(message, channel);
-                return;
+                if (match.Length == message.Length)
+                {
+                    TranslateCmd(message, channel);
+                    return true;
+                }
+
+                return false;
             }
 
             switch (message)
             {
                 case "/cat":
                     CatCmd(channel);
-                    break;
+                    return true;
                 case "/music":
                     MusicCmd(channel);
-                    break;
+                    return true;
                 case "/8ball":
                     channel.SendMessage(EightBallService.Get());
-                    break;
+                    return true;
                 case "/help":
                     channel.SendMessage("https://raw.githubusercontent.com/dreanor/NekoBot/master/NekoBot/commands.PNG");
-                    break;
+                    return true;
                 default:
-                    break;
+                    return true;
             }
         }
 

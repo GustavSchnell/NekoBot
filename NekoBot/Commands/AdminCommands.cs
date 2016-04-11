@@ -17,26 +17,25 @@ namespace NekoBot.Commands
             this.client = client;
         }
 
-        public void HandleCommands(DiscordMessageEventArgs e)
+        public bool HandleCommands(DiscordMessageEventArgs e)
         {
             string message = e.MessageText;
 
             if (deleteCommand.IsMatch(message))
             {
-                DeleteMessagesCmd(e, message);
-                return;
+                return DeleteMessagesCmd(e, message);
             }
 
             switch (message)
             {
                 case "/clear":
                     ClearCmd(e.Channel);
-                    break;
+                    return true;
                 case "/reload":
                     ReloadCmd();
-                    break;
+                    return true;
                 default:
-                    break;
+                    return true;
             }
         }
 
@@ -45,14 +44,21 @@ namespace NekoBot.Commands
             ConfigReload(ConfigLoader.Get(), null);
         }
 
-        private void DeleteMessagesCmd(DiscordMessageEventArgs e, string message)
+        private bool DeleteMessagesCmd(DiscordMessageEventArgs e, string message)
         {
             string[] splittedCommand = message.Split(' ');
 
             int result = 0;
-            int.TryParse(splittedCommand[1], out result);
-
-            client.DeleteMultipleMessagesInChannel(e.Channel, result);
+            bool parsed = int.TryParse(splittedCommand[1], out result);
+            if (parsed)
+            {
+                client.DeleteMultipleMessagesInChannel(e.Channel, result);
+            }
+            else
+            {
+                e.Channel.SendMessage("Wrong command.");
+            }
+            return parsed;
         }
 
         private void ClearCmd(DiscordChannel channel)

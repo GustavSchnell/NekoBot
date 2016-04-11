@@ -50,10 +50,17 @@ namespace NekoBot.Services
                 apiCallsBlocker.WaitOne();
                 if (AllowedToExecuteAdminCommands(e))
                 {
-                    adminCommands.HandleCommands(e);
+                    if (!adminCommands.HandleCommands(e))
+                    {
+                        channel.SendMessage("Wrong command usage.");
+                    }
                 }
 
-                userCommands.HandleCommands(message, channel);
+                if (!userCommands.HandleCommands(message, channel))
+                {
+                    channel.SendMessage("Wrong command usage.");
+                }
+
                 apiCallsBlocker.Release(1);
             }
             catch (Exception ex)

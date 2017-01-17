@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NekoBot", "NekoBot\NekoBot.csproj", "{865F51EC-77E8-42CC-A686-9CC0DCA22A64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NekoBot", "NekoBot\NekoBot.csproj", "{70A911DA-85BC-4E90-8E7E-62B15DFCFF83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NekoPlugin", "NekoPlugin\NekoPlugin.csproj", "{E60B1390-4DE3-496B-BDC2-AECA2C478241}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginContracts", "PluginContracts\PluginContracts.csproj", "{E79D8C86-4EA1-4E62-91CE-4EEF8180C21A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{C2927DC6-0598-4100-A7F9-68A8A3AEF5EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +17,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{865F51EC-77E8-42CC-A686-9CC0DCA22A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{865F51EC-77E8-42CC-A686-9CC0DCA22A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{865F51EC-77E8-42CC-A686-9CC0DCA22A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{865F51EC-77E8-42CC-A686-9CC0DCA22A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A911DA-85BC-4E90-8E7E-62B15DFCFF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A911DA-85BC-4E90-8E7E-62B15DFCFF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A911DA-85BC-4E90-8E7E-62B15DFCFF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A911DA-85BC-4E90-8E7E-62B15DFCFF83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60B1390-4DE3-496B-BDC2-AECA2C478241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60B1390-4DE3-496B-BDC2-AECA2C478241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60B1390-4DE3-496B-BDC2-AECA2C478241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60B1390-4DE3-496B-BDC2-AECA2C478241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E79D8C86-4EA1-4E62-91CE-4EEF8180C21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79D8C86-4EA1-4E62-91CE-4EEF8180C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79D8C86-4EA1-4E62-91CE-4EEF8180C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79D8C86-4EA1-4E62-91CE-4EEF8180C21A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E60B1390-4DE3-496B-BDC2-AECA2C478241} = {C2927DC6-0598-4100-A7F9-68A8A3AEF5EB}
 	EndGlobalSection
 EndGlobal

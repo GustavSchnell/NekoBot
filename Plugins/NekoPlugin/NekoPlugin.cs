@@ -8,10 +8,10 @@ namespace NekoPlugin
 {
     public class NekoPlugin : IPlugin
     {
+        public string Name => nameof(NekoPlugin);
+
         private const string RandomNekoUrl = "http://random.cat/meow";
         private DiscordClient client;
-
-        public string Name => nameof(NekoPlugin);
 
         public void Connect(DiscordClient client)
         {

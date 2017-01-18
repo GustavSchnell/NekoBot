@@ -7,8 +7,6 @@ namespace NekoBot
 {
     public class DiscordConnector
     {
-        //https://discordapp.com/oauth2/authorize?&client_id=CLIENT_ID&scope=bot&permissions=0
-
         private Dictionary<string, IPlugin> availablePlugins;
         private DiscordClient client;
         private Config config;

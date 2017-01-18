@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace NekoBot.Services
+namespace MagicBallPlugin
 {
-    public class EightBallService
+    public class Answers
     {
-        //load from file
-        private static List<string> anwsers = new List<string>
+        public List<string> Anwsers = new List<string>
         {
             "As I see it, yes",
             "Better not tell you now",
@@ -31,12 +29,5 @@ namespace NekoBot.Services
             "You can\"t handle the truth",
             "私はあなたのお母さんを翻訳しました"
         };
-
-        public static string Get()
-        {
-            Random random = new Random();
-            int rnd = random.Next(0, anwsers.Count -1);
-            return anwsers[rnd];
-        }
     }
 }

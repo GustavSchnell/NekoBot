@@ -1,5 +1,7 @@
-﻿using PluginContracts;
+﻿using Newtonsoft.Json;
+using PluginContracts;
 using System.Collections.Generic;
+using System.IO;
 
 namespace NekoBot
 {
@@ -7,14 +9,24 @@ namespace NekoBot
     {
         public static void Main(string[] args)
         {
-            DiscordConnector discordConnector = new DiscordConnector(GetAvailablePlugins());
-            discordConnector.Run();
+            new DiscordConnector(LoadConfig(), GetAvailablePlugins()).Connect();
+        }
+
+        private static Config LoadConfig()
+        {
+            const string configName = "config.json";
+
+            if (!File.Exists(configName))
+            {
+                File.WriteAllText(configName, JsonConvert.SerializeObject(new Config(""), Formatting.Indented));
+            }
+            return JsonConvert.DeserializeObject<Config>(File.ReadAllText(configName));
         }
 
         private static Dictionary<string, IPlugin> GetAvailablePlugins()
         {
             var availablePlugins = new Dictionary<string, IPlugin>();
-            List<IPlugin> plugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
+            var plugins = PluginLoader<IPlugin>.LoadPlugins("Plugins");
             foreach (var item in plugins)
             {
                 availablePlugins.Add(item.Name, item);

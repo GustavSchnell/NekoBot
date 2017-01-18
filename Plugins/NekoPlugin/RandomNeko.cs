@@ -1,4 +1,4 @@
-﻿namespace NekoBot
+﻿namespace NekoPlugin
 {
     public class RandomNeko
     {

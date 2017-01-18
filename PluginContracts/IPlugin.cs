@@ -1,9 +1,11 @@
-﻿namespace PluginContracts
+﻿using Discord;
+
+namespace PluginContracts
 {
     public interface IPlugin
     {
         string Name { get; }
 
-        string CreateMessage();
+        void Connect(DiscordClient client);
     }
 }

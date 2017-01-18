@@ -17,11 +17,7 @@ namespace NekoBot
             this.config = config;
             client = new DiscordClient();
             client.Log.Message += Log_Message;
-        }
-
-        private void Log_Message(object sender, LogMessageEventArgs e)
-        {
-            Console.WriteLine($"[{DateTime.Now.ToString()}][{e.Source}] {e.Message}");
+            client.MessageReceived += Client_MessageReceived;
         }
 
         public void Connect()
@@ -35,10 +31,23 @@ namespace NekoBot
             }
             client.Log.Info("NekoBot", "All Plugins loaded");
 
-            client.ExecuteAndWait(async () => 
+            client.ExecuteAndWait(async () =>
             {
                 await client.Connect(config.BotAccountToken, TokenType.Bot);
             });
+        }
+
+        private void Client_MessageReceived(object sender, MessageEventArgs e)
+        {
+            if (!e.Message.IsAuthor && e.Message.Text.StartsWith("/help"))
+            {
+                e.Channel.SendMessage("https://raw.githubusercontent.com/dreanor/NekoBot/master/NekoBot/commands.PNG");
+            }
+        }
+
+        private void Log_Message(object sender, LogMessageEventArgs e)
+        {
+            Console.WriteLine($"[{DateTime.Now.ToString()}][{e.Source}] {e.Message}");
         }
     }
 }

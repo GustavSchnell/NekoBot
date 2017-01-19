@@ -25,7 +25,7 @@ namespace NekoBot
                 return null;
             }
 
-            dllFileNames = Directory.GetFiles(path, "*.dll");
+            dllFileNames = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/" + path, "*.dll");
 
             List<Assembly> assemblies = new List<Assembly>(dllFileNames.Length);
             foreach (string dllFile in dllFileNames)

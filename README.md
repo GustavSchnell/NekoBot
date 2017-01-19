@@ -6,6 +6,7 @@ Discord Bot that posts random cat images and other things with an easy to implem
 ##How to run:
 https://discordapp.com/oauth2/authorize?&client_id=CLIENT_ID&scope=bot&permissions=0
 
+##How to create a new plugin:
 
 ###Commands:
 | Command | Description | Permission |

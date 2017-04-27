@@ -3,10 +3,10 @@
 
 Discord Bot that posts random cat images and other things with an easy to implement plugin system.
 
-##How to run:
+## How to run:
 https://discordapp.com/oauth2/authorize?&client_id=CLIENT_ID&scope=bot&permissions=0
 
-##How to create a new plugin:
+## How to create a new plugin:
 
 ```c#
 //Add the PluginContracts.dll to your project and implement the IPlugin interface
@@ -32,7 +32,7 @@ public class NekoPlugin : IPlugin
 }
 ```
 
-###Commands:
+### Commands:
 | Command | Description | Permission |
 | ------------- | ------------- | ------------- |
 | /cat  | Posts a random cat link from http://random.cat/  | @everyone |

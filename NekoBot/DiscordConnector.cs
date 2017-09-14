@@ -43,7 +43,8 @@ namespace NekoBot
         {
             if (e.Message.Text.Equals("/help"))
             {
-                e.Channel.SendMessage(string.Join(Environment.NewLine, services.Select(x => x.ComamndsHelp).ToList()));
+                var commands = services.Select(x => string.Join(Environment.NewLine, x.ComamndsHelp)).ToList();
+                e.Channel.SendMessage(string.Join(Environment.NewLine, commands));
             }
         }
 

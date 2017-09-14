@@ -12,7 +12,7 @@ namespace NekoBot.Services.Eightball
 
         public List<string> ComamndsHelp => new List<string>
         {
-            "/8ball - Ask your question to the magic ball."
+            "/8ball - Ask your question to the magic ball"
         };
 
         private DiscordClient client;

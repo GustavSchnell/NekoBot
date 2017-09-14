@@ -12,7 +12,7 @@ namespace NekoBot.Services.Neko
 
         public List<string> ComamndsHelp => new List<string>
         {
-            "/cat - Posts random cats."
+            "/cat - Posts random cats"
         };
 
         private const string RandomNekoUrl = "http://random.cat/meow";

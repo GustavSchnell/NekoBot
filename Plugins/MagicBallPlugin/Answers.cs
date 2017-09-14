@@ -2,9 +2,9 @@
 
 namespace MagicBallPlugin
 {
-    public class Answers
+    public class Answer
     {
-        public List<string> Anwsers = new List<string>
+        public List<string> Answers = new List<string>
         {
             "As I see it, yes",
             "Better not tell you now",

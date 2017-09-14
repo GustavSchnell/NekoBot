@@ -16,6 +16,7 @@ namespace NekoBot
             this.availablePlugins = availablePlugins;
             this.config = config;
             client = new DiscordClient();
+            client.SetGame("Say /help");
             client.Log.Message += Log_Message;
             client.MessageReceived += Client_MessageReceived;
         }
@@ -39,9 +40,16 @@ namespace NekoBot
 
         private void Client_MessageReceived(object sender, MessageEventArgs e)
         {
-            if (!e.Message.IsAuthor && e.Message.Text.StartsWith("/help"))
+            if (e.Message.Text.Equals("/help"))
             {
-                e.Channel.SendMessage("https://raw.githubusercontent.com/dreanor/NekoBot/master/NekoBot/commands.PNG");
+                e.Channel.SendMessage("The following commands are available:");
+                foreach (var plugin in availablePlugins)
+                {
+                    foreach (var command in plugin.Value.ComamndsHelp)
+                    {
+                        e.Channel.SendMessage(command);
+                    }
+                }
             }
         }
 

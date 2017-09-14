@@ -3,12 +3,18 @@ using Newtonsoft.Json;
 using PluginContracts;
 using System;
 using System.Net;
+using System.Collections.Generic;
 
 namespace NekoPlugin
 {
     public class NekoPlugin : IPlugin
     {
         public string Name => nameof(NekoPlugin);
+
+        public List<string> ComamndsHelp => new List<string>
+        {
+            "/cat - Posts random cats."
+        };
 
         private const string RandomNekoUrl = "http://random.cat/meow";
         private DiscordClient client;
@@ -21,9 +27,10 @@ namespace NekoPlugin
 
         private void Client_MessageReceived(object sender, MessageEventArgs e)
         {
-            if (!e.Message.IsAuthor && e.Message.Text.StartsWith("/cat"))
+            if (e.Message.Text.Equals("/cat"))
             {
                 e.Channel.SendMessage(GetRandomNeko());
+                e.Message.Delete();
             }
         }
 

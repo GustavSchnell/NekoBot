@@ -1,4 +1,5 @@
 ﻿using Discord;
+using System.Collections.Generic;
 
 namespace PluginContracts
 {
@@ -7,5 +8,7 @@ namespace PluginContracts
         string Name { get; }
 
         void Connect(DiscordClient client);
+
+        List<string> ComamndsHelp { get; }
     }
 }

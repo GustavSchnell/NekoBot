@@ -16,7 +16,6 @@ namespace NekoBot
             this.availablePlugins = availablePlugins;
             this.config = config;
             client = new DiscordClient();
-            client.SetGame("Say /help");
             client.Log.Message += Log_Message;
             client.MessageReceived += Client_MessageReceived;
         }
@@ -35,7 +34,10 @@ namespace NekoBot
             client.ExecuteAndWait(async () =>
             {
                 await client.Connect(config.BotAccountToken, TokenType.Bot);
+                client.SetGame("Say /help");
             });
+
+            
         }
 
         private void Client_MessageReceived(object sender, MessageEventArgs e)

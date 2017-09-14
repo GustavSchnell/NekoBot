@@ -1,19 +1,20 @@
 ﻿using Discord;
-using PluginContracts;
+using NekoBot.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NekoBot
 {
     public class DiscordConnector
     {
-        private Dictionary<string, IPlugin> availablePlugins;
+        private List<ICommonService> services;
         private DiscordClient client;
         private Config config;
 
-        public DiscordConnector(Config config, Dictionary<string, IPlugin> availablePlugins)
+        public DiscordConnector(Config config, List<ICommonService> services)
         {
-            this.availablePlugins = availablePlugins;
+            this.services = services;
             this.config = config;
             client = new DiscordClient();
             client.Log.Message += Log_Message;
@@ -24,10 +25,10 @@ namespace NekoBot
         {
             client.Log.Info("NekoBot", "Loading Plugins...");
 
-            foreach (var plugin in availablePlugins)
+            foreach (var plugin in services)
             {
-                plugin.Value.Connect(client);
-                client.Log.Info("NekoBot", $"{plugin.Key} loaded");
+                plugin.Connect(client);
+                client.Log.Info("NekoBot", $"{plugin.Name} loaded");
             }
             client.Log.Info("NekoBot", "All Plugins loaded");
 
@@ -36,22 +37,13 @@ namespace NekoBot
                 await client.Connect(config.BotAccountToken, TokenType.Bot);
                 client.SetGame("Say /help");
             });
-
-            
         }
 
         private void Client_MessageReceived(object sender, MessageEventArgs e)
         {
             if (e.Message.Text.Equals("/help"))
             {
-                e.Channel.SendMessage("The following commands are available:");
-                foreach (var plugin in availablePlugins)
-                {
-                    foreach (var command in plugin.Value.ComamndsHelp)
-                    {
-                        e.Channel.SendMessage(command);
-                    }
-                }
+                e.Channel.SendMessage(string.Join(Environment.NewLine, services.Select(x => x.ComamndsHelp).ToList()));
             }
         }
 

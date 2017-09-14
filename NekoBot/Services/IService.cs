@@ -1,9 +1,9 @@
 ﻿using Discord;
 using System.Collections.Generic;
 
-namespace NekoBot.Services.Neko
+namespace NekoBot.Services
 {
-    public interface IService
+    public interface ICommonService
     {
         string Name { get; }
 

@@ -71,7 +71,11 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="DiscordConnector.cs" />
-    <Compile Include="PluginLoader.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\EightBall\Answers.cs" />
+    <Compile Include="Services\EightBall\MagicBallService.cs" />
+    <Compile Include="Services\Neko\NekoService.cs" />
+    <Compile Include="Services\Neko\RandomNeko.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,12 +85,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PluginContracts\PluginContracts.csproj">
-      <Project>{e79d8c86-4ea1-4e62-91ce-4eef8180c21a}</Project>
-      <Name>PluginContracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
